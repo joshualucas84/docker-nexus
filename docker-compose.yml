@@ -1,0 +1,14 @@
+version: '3.5'
+services:  
+  nexus:
+    container_name: containerize_nexus_1 
+    build: ./oss 
+    volumes:
+      - "$PWD/test-data:/sonatype-work"
+    ports:
+      - "8081:8081"
+  nginx:
+    container_name: containerize_nginx_1
+    build: ./nginx
+    ports:
+      - '443:443' 
