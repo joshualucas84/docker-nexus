@@ -4,7 +4,7 @@ services:
     container_name: containerize_nexus_1 
     build: ./oss 
     volumes:
-      - "$PWD/test-data:/sonatype-work"
+      - "$PWD/nexus-data:/sonatype-work"
     ports:
       - "8081:8081"
   nginx:

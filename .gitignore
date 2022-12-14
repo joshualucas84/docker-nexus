@@ -1,5 +1,5 @@
 # exclude everything
-test-data/*
+nexus-data/*
 
 # exception to the rule
-!test-data/.gitkeep 
+!nexus-data/.gitkeep 

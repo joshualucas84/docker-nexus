@@ -2,52 +2,16 @@
 
 
 test_http() {
-  # Check that status is 200 OK
+  # Check that status is 302 REDIRECT
   status_code=$(curl -k -s -o /dev/null -w %{http_code} https://localhost 2> /dev/null)
 
-  if [[ $status_code == "200" ]]
+  if [[ $status_code == "302" ]]
   then
       echo "Pass: status code is ${status_code}";
   else
       echo "Fail: status code is ${status_code}";
   fi
 
-  response=$(curl -k https://localhost 2> /dev/null)
-
-  # Verify x-forwarded-for is in the response body and not "None"
-  fwd_for=$(echo "$response" | grep -E "X-Forwarded-For: \b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b")
-  if [[ "${fwd_for}" != "" ]]
-  then
-      echo "Pass: X-Forwarded-For is present and not 'None'";
-  else
-      echo "Fail: X-Forwarded-For should not be 'None'";
-  fi
-
-  # Verify x-real-ip is in the response body and not "None"
-  real_ip=$(echo "$response" | grep -E "X-Real-IP: \b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b")
-  if [[ "${real_ip}" != "" ]]
-  then
-      echo "Pass: X-Real-IP is present and not 'None'";
-  else
-      echo "Fail: X-Real-IP should not be 'None'";
-  fi
-
-  # Verify x-forwarded-proto is in the response body and not "None"
-  fwd_proto=$(echo "$response" | grep -E "X-Forwarded-Proto: https")
-  if [[ "${fwd_proto}" != "" ]]
-  then
-      echo "Pass: X-Forwarded-Proto is present and not 'None'";
-  else
-      echo "Fail: X-Forwarded-Proto should not be 'None'";
-  fi
-
-  content=$(echo "$response" | grep "It's easier to ask forgiveness than it is to get permission.")
-  if [[ "$content" != "" ]]
-  then
-    echo "Pass: found \"It's easier to ask forgiveness than it is to get permission.\" in response"
-  else
-    echo "Fail: \"It's easier to ask forgiveness than it is to get permission.\" missing from response"
-  fi
 }
 
 test_local_dev() {
@@ -77,7 +41,7 @@ function usage {
 }
 
 ME=`basename $0`
-TEST_SSL="no"
+TEST_SSL="yes"
 
 while getopts ":sh" option
 do

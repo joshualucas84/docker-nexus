@@ -7,8 +7,6 @@ For Nexus Repository Manager 3, please refer to https://github.com/sonatype/dock
   - [Notes](#notes)
     - [Persistent Data](#persistent-data)
     - [Adding Nexus Plugins](#adding-nexus-plugins)
-    - [Build Args](#build-args)
-  - [Getting Help](#getting-help)
 
 To build:
 ```
@@ -97,22 +95,3 @@ Creating a docker image based on `sonatype/nexus` is the suggested
 process: plugins should be expanded to `/opt/sonatype/nexus/nexus/WEB-INF/plugin-repository`.
 See https://github.com/sonatype/docker-nexus/issues/9 for an example
 concerning the Nexus P2 plugins.
-
-### Build Args
-
-Each Dockerfile contains two build arguments (`NEXUS_VERSION` & `NEXUS_DOWNLOAD_URL`) that can be used to customize what
-version of, and from where, Nexus Repository Manager is downloaded. This is useful mostly for testing purposes as the
-Dockerfile may be dependent on a very specific version of Nexus Repository Manager.
-
-```
-docker build --rm --tag nexus-custom-oss --build-arg NEXUS_VERSION=2.x.y --build-arg NEXUS_DOWNLOAD_URL=http://.../nexus-2.x.y-bundle.tar.gz oss/
-docker build --rm --tag nexus-custom-pro --build-arg NEXUS_VERSION=2.x.y --build-arg NEXUS_DOWNLOAD_URL=http://.../nexus-professional-2.x.y-bundle.tar.gz pro/
-```
-
-## Getting Help
-
-Looking to contribute to our Docker image but need some help? There's a few ways to get information or our attention:
-
-* File a public issue [here on GitHub](https://github.com/sonatype/docker-nexus/issues)
-* Check out the [Nexus](http://stackoverflow.com/questions/tagged/nexus) tag on Stack Overflow
-* Check out the [Nexus Repository User List](https://groups.google.com/a/glists.sonatype.com/forum/?hl=en#!forum/nexus-users)
